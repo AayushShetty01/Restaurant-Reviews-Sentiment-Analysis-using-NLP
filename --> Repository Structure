@@ -1,0 +1,16 @@
+restaurant-sentiment-analysis-nlp/
+│
+├── data/
+│ └── restaurant_reviews.csv
+│
+├── src/
+│ ├── preprocessing.py
+│ ├── feature_extraction.py
+│ ├── models.py
+│ └── evaluation.py
+│
+├── experiments/
+│ └── model_comparison.ipynb
+│
+├── requirements.txt
+└── .gitignore

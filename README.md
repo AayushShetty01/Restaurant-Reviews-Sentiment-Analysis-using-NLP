@@ -1,86 +1,45 @@
-# Sentiment Analysis of Restaurant Reviews using NLP
+# Restaurant Review Sentiment Analysis
 
-## Project Overview
-This project implements an NLP-based sentiment analytics system to classify
-restaurant reviews as positive or negative. The system processes unstructured
-text data using linguistic preprocessing and applies supervised machine learning
-models to extract actionable insights from customer feedback.
+A reproducible Python/NLP pipeline for classifying restaurant reviews as positive or negative.
 
-The project demonstrates end-to-end NLP pipeline design, feature engineering,
-model training, and empirical evaluation.
+## Pipeline
+1. Load a labelled CSV dataset.
+2. Clean review text with regular expressions, stop-word removal, and stemming.
+3. Split the data into training and test sets.
+4. Fit TF-IDF features on the training data only.
+5. Train Logistic Regression and Linear SVM classifiers.
+6. Report accuracy and weighted F1-score on the held-out test set.
 
----
+## Expected dataset format
+The training CSV must contain two columns:
 
-## Objectives
-- Build a scalable text preprocessing pipeline for unstructured data
-- Apply supervised learning techniques for sentiment classification
-- Compare linear classifiers in high-dimensional text feature space
-- Evaluate model performance using standard machine learning metrics
+```text
+review,sentiment
+"The food was excellent",positive
+"The service was slow",negative
+```
 
----
+The dataset is intentionally not committed unless its licence permits redistribution.
 
-## Dataset
-- Source: Public restaurant review dataset (e.g., Yelp / Kaggle)
-- Size: 10,000+ text reviews
-- Labels: Positive / Negative sentiment
-
----
-
-## Methodology
-
-### 1. Text Preprocessing
-- Tokenization
-- Stop-word removal
-- Stemming (Porter Stemmer)
-- Noise filtering using regular expressions
-
-Implemented using **NLTK** to reduce vocabulary size and improve model generalization.
-
----
-
-### 2. Feature Extraction
-- TF-IDF vectorization
-- Vocabulary capped at 5,000 features
-
-This step transforms symbolic text data into numerical representations suitable
-for statistical learning models.
-
----
-
-### 3. Supervised Learning Models
-- Logistic Regression (baseline linear classifier)
-- Linear Support Vector Machine (margin-based classifier)
-
----
-
-### 4. Evaluation Strategy
-- 80/20 train-test split
-- Accuracy and F1-score for model comparison
-
----
-
-## Results
-
-| Model | Accuracy |
-|------|----------|
-| Logistic Regression | 76% |
-| Linear SVM | **78%** |
-
-Linear SVM demonstrated improved performance due to better margin optimization
-in sparse TF-IDF feature space.
-
----
-
-## Technologies
-- Python 3
-- Pandas, NumPy
-- NLTK
-- Scikit-learn
-- Git & GitHub
-
----
-
-## How to Run
+## Installation
 ```bash
+python -m venv .venv
+source .venv/bin/activate
 pip install -r requirements.txt
-python src/models.py
+```
+
+On Windows activate with `.venv\\Scripts\\activate`.
+
+## Run
+From the repository root:
+```bash
+python -m src.models --data data/restaurant_reviews.csv
+```
+
+Use `--help` to see available options.
+
+## Design notes
+TF-IDF is fitted only on the training split to prevent information leakage. Evaluation reports both accuracy and F1-score.
+
+## Project status
+Educational NLP project demonstrating preprocessing, feature extraction, supervised classification, and evaluation.
